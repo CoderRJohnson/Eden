@@ -53,6 +53,7 @@ namespace eden
      private:
       eosio::name contract;
       global_data_v1 data;
+      global_singleton global_stats;
 
      public:
       explicit globals(eosio::name contract);
