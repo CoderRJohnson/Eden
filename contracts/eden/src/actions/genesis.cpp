@@ -160,5 +160,21 @@ namespace eden
       atomicassets::init_collection(atomic_assets_account, get_self(), collection_name, schema_name,
                                     initial_market_fee, collection_attributes);
    }
+   
+   void eden::modifymindon(eosio::asset minimum_donation)
+   {
+       require_auth(get_self());
+
+       globals globals{get_self()};
+
+       auto stats = globals.get();
+
+       eosio::check(minimum_donation.symbol == stats.minimum_donation.symbol,
+                    "minimum donation symbol does not match");
+
+       stats.minimum_donation = minimum_donation;
+
+       global_stats.set(stats, contract);
+   }
 
 }  // namespace eden
