@@ -8,11 +8,11 @@ on:
     pull_request:
         types: [assigned, opened, synchronize, reopened, labeled]
         paths:
-            - ".github/workflows/build.yml"
+            # - ".github/workflows/build.yml"
 
             # C++
             - "CMakeLists.txt"
-            - "contracts/**"
+            # - "contracts/**"
             - "external/CMakeLists.txt"
             - "libraries/**"
             - "native/**"
