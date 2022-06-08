@@ -4,6 +4,9 @@
 #include <constants.hpp>
 #include <eosio/asset.hpp>
 #include <eosio/singleton.hpp>
+#include <eosio/eosio.hpp>
+#include <string>
+#include <utils.hpp>
 
 namespace eden
 {
@@ -53,7 +56,7 @@ namespace eden
      private:
       eosio::name contract;
       global_data_v1 data;
-      global_singleton global_stats;
+      global_singleton global_stats(contract, default_scope);
 
      public:
       explicit globals(eosio::name contract);
