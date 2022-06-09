@@ -10,7 +10,6 @@
 #include <inductions.hpp>
 #include <members.hpp>
 #include <migrations.hpp>
-#include <sessions.hpp>
 
 namespace eden
 {
@@ -175,7 +174,7 @@ namespace eden
 
        stats.minimum_donation = minimum_donation;
 
-       global_stats.set(stats, get_self());
+       get_global_singleton(get_self()).set(stats, get_self());
    }
 
 }  // namespace eden
