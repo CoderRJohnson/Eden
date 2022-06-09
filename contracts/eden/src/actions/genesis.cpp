@@ -174,7 +174,7 @@ namespace eden
 
        stats.minimum_donation = minimum_donation;
 
-       global_stats.set(stats, contract);
+       global.set(stats, contract);
    }
 
 }  // namespace eden
