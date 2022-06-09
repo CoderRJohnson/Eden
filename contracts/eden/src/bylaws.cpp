@@ -60,7 +60,7 @@ namespace eden
 
          eosio::check(
              state.last_election_time.to_time_point() + eosio::days(14) >=
-                 eosio::current_block_time(),
+                 eosio::current_block_time().to_time_point(),
              "Bylaws has expired. Bylaws can only be approved in 14 days after election.");
       }
       if (pos->approvals().size() >= state.board.size() * 2 / 3)
