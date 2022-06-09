@@ -762,7 +762,7 @@ namespace eden
             members.set_rank(board_member, round, winner);
          }
       }
-      members.set_rank(winner, round, winner);
+      members.set_rank(winner, round + 1, winner);
       results.set(result, contract);
 
       process_election_distribution(contract);
