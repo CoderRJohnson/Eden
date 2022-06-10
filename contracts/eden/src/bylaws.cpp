@@ -53,15 +53,10 @@ namespace eden
       if (next_state == ratified)
       {
          eosio::check(
-             pos->time().to_time_point() + eosio::days(14) <=
+             pos->time().to_time_point() + eosio::days(90) <=
                  state.last_election_time.to_time_point(),
-             "Bylaws can only be approved if they were proposed at least 14 days before the last "
+             "Bylaws can only be approved if they were proposed at least 90 days before the last "
              "election.");
-
-         eosio::check(
-             state.last_election_time.to_time_point() + eosio::days(14) >=
-                 eosio::current_block_time().to_time_point(),
-             "Bylaws has expired. Bylaws can only be approved in 14 days after election.");
       }
       if (pos->approvals().size() >= state.board.size() * 2 / 3)
       {
