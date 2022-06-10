@@ -598,7 +598,7 @@ namespace eden
                {
                   auto board = extract_board();
                   auto winner = board.front();
-                  finish_election(std::move(board), winner);
+                  finish_election(std::move(board), winner, false);
                   --max_steps;
                   return max_steps;
                }
@@ -745,7 +745,7 @@ namespace eden
           .send();
    }
 
-   void elections::finish_election(std::vector<eosio::name>&& board, eosio::name winner)
+   void elections::finish_election(std::vector<eosio::name>&& board, eosio::name winner, bool final)
    {
       election_state_singleton results(contract, default_scope);
       auto result = std::get<election_state_v0>(results.get());
@@ -762,7 +762,14 @@ namespace eden
             members.set_rank(board_member, round, winner);
          }
       }
-      members.set_rank(winner, round + 1, winner);
+      if(final && round != 0)
+      {
+         members.set_rank(winner, round, winner);
+      }
+      else
+      {
+         members.set_rank(winner, round + 1, winner);
+      }
       results.set(result, contract);
 
       process_election_distribution(contract);
@@ -842,7 +849,7 @@ namespace eden
             std::uniform_int_distribution<uint32_t> dist(0, board.size() - 1);
             auto winner = board[dist(rng)];
 
-            finish_election(std::move(board), winner);
+            finish_election(std::move(board), winner, true);
             --max_steps;
          }
          return max_steps;
