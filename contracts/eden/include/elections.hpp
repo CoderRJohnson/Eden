@@ -269,7 +269,7 @@ namespace eden
       void add_voter(election_rng& rng, uint8_t round, uint16_t& next_index, eosio::name member);
       uint32_t randomize_voters(current_election_state_init_voters_v0& state, uint32_t max_steps);
       std::vector<eosio::name> extract_board();
-      void finish_election(std::vector<eosio::name>&& board, eosio::name winner);
+      void finish_election(std::vector<eosio::name>&& board, eosio::name winner, bool final);
       bool remove_from_board(eosio::name member);
 
      public:
