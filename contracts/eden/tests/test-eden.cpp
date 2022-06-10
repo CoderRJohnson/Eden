@@ -1109,6 +1109,7 @@ TEST_CASE("multi budget adjustment on resignation")
    t.genesis();
    auto members = make_names(100);
    t.create_accounts(members);
+   cout << "123" << endl;
    for (auto a : members)
    {
       t.chain.start_block();
@@ -1118,11 +1119,13 @@ TEST_CASE("multi budget adjustment on resignation")
    t.run_election();
    t.set_balance(s2a("10000.0000 EOS"));
    t.skip_to("2020-09-02T15:30:00.000");
+   cout << "1231" << endl;
    auto lead_representative =
        std::get<eden::election_state_v0>(
            eden::election_state_singleton{"eden.gm"_n, eden::default_scope}.get())
            .lead_representative;
    t.chain.as(lead_representative).act<actions::resign>(lead_representative);
+   cout << "1232" << endl;
    std::map<eosio::block_timestamp, eosio::asset> expected{
        {s2t("2020-07-04T15:30:00.000"), s2a("36.2560 EOS")},
        {s2t("2020-08-03T15:30:00.000"), s2a("293.3316 EOS")},
