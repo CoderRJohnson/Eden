@@ -170,7 +170,7 @@ namespace eden
        auto stats = globals.get();
 
        eosio::check(minimum_donation.symbol == stats.minimum_donation.symbol,
-                    "minimum donation symbol does not match");
+                    "minimum donation symbol does not match"+stats.minimum_donation.symbol+minimum_donation.symbol);
 
        stats.minimum_donation = minimum_donation;
 
