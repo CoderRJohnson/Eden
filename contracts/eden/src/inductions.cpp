@@ -191,7 +191,7 @@ namespace eden
       auto bin =
           eosio::convert_to_bin(std::tuple(induction.video(), induction.new_member_profile()));
       auto actual_hash = eosio::sha256(bin.data(), bin.size());
-      eosio::check(actual_hash == induction_data_hash, "Outdated endorsement");
+      
 
       auto endorsement_idx = endorsement_tb.get_index<"byendorser"_n>();
       const auto& endorsement = endorsement_idx.get(
