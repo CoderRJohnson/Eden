@@ -58,7 +58,7 @@ namespace eden
       eosio::from_bin(block_time, bytes);
       bytes.skip(4 + 4);
       eosio::check(block_time >= eosio::time_point_sec(start_time), "Seed block is too early");
-      eosio::check(block_time < eosio::time_point_sec(end_time), "Seed block is too late");
+      
       current = hash2;
    }
 
