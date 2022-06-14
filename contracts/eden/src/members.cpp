@@ -219,10 +219,7 @@ namespace eden
 
       elections elections{contract};
       auto election_time = elections.get_next_election_time();
-      eosio::check(
-          election_time && eosio::current_time_point() + eosio::seconds(election_seeding_window) <
-                               election_time->to_time_point(),
-          "Registration has closed");
+      
 
       uint8_t new_participation_status;
       if (participating)
