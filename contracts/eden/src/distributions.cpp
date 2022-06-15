@@ -23,6 +23,7 @@ namespace eden
                                                  eosio::block_timestamp start_time,
                                                  eosio::asset& amount)
    {
+      eosio::check(amount.amount == 0, "Overdrawn balance"+amount.amount);
       members members{contract};
       current_distribution result{start_time, eosio::name()};
       auto ranks = members.stats().ranks;
