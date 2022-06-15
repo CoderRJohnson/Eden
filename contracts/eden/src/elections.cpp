@@ -624,8 +624,7 @@ namespace eden
       eosio::check(std::holds_alternative<current_election_state_active>(state),
                    "The election is not ready for voting");
       auto result = std::get<current_election_state_active>(state);
-      eosio::check(eosio::current_block_time() < result.round_end,
-                   "Voting period for this round has closed");
+      
       return result;
    }
 
