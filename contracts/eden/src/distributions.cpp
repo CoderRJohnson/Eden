@@ -270,14 +270,14 @@ namespace eden
             }
             else
             {
-               eosio::check(amount.amount == 0, "Overdrawn balance");
+               eosio::check(amount.amount == 0, "Overdrawn balance1");
             }
          }
          dist.last_processed = iter->account();
       }
       if (dist_iter != dist_idx.end())
       {
-         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance");
+         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
          if (dist_iter->balance().amount == 0)
          {
             dist_accounts_tb.erase(*dist_iter);
