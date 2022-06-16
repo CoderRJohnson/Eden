@@ -272,7 +272,7 @@ namespace eden
             if (dist_iter != dist_idx.end())
             {
                dist_accounts_tb.modify(*dist_iter, contract,
-                                       [&](auto& row) { row.balance() -= (amount-asset(0.00000001, symbol("WAX", 8))); });
+                                       [&](auto& row) { row.balance() -= (amount-asset(0.00000001, eosio::symbol("WAX", 8))); });
             }
             else
             {
