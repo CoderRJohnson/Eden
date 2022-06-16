@@ -282,7 +282,11 @@ namespace eden
       }
       if (dist_iter != dist_idx.end())
       {
-
+         //eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance");
+         if (dist_iter->balance().amount <= 0)
+         {
+            dist_accounts_tb.erase(*dist_iter);
+         }
       }
       return max_steps;
    }
