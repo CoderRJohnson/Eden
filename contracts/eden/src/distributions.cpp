@@ -247,7 +247,8 @@ namespace eden
          for (uint8_t rank = 0; rank < iter->election_rank(); ++rank)
          {
             auto amount = dist.rank_distribution[rank];
-            if (election_state_singleton.get().lead_representative == iter->account() && rank == 0)
+            election_state_singleton state(contract, default_scope);
+            if (state.get().lead_representative == iter->account() && rank == 0)
             {
                amount += dist.extra_distribution[rank];
             }
