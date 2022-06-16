@@ -55,7 +55,6 @@ namespace eden
       eosio::block_timestamp distribution_time;
       eosio::name last_processed;
       std::vector<eosio::asset> rank_distribution;
-      std::vector<eosio::asset> extra_distribution;
    };
    EOSIO_REFLECT(current_distribution, distribution_time, last_processed, rank_distribution)
 
