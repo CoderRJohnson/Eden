@@ -248,7 +248,8 @@ namespace eden
          {
             auto amount = dist.rank_distribution[rank];
             election_state_singleton state(contract, default_scope);
-            if (state.get().lead_representative == iter->account() && rank == 0)
+            auto state_value = std::get<election_state_v0>(state.get_or_default());
+            if (state_value.lead_representative == iter->account() && rank == 0)
             {
                amount += dist.extra_distribution[rank];
             }
