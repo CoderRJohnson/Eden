@@ -28,6 +28,7 @@ namespace eden
       auto ranks = members.stats().ranks;
       auto per_rank = amount / (ranks.size() - 1);
       eosio::asset used{0, amount.symbol};
+      result.extra_distribution.push_back(used);
       uint16_t total = 0;
       for (auto iter = ranks.end() - 1, end = ranks.begin(); iter != end; --iter)
       {
@@ -41,7 +42,7 @@ namespace eden
       }
       if (ranks.back() != 0)
       {
-         result.rank_distribution.back() += (amount - used);
+         result.extra_distribution.back() += (amount - used);
       }
       else
       {
@@ -250,7 +251,7 @@ namespace eden
             auto state_value = std::get<election_state_v0>(state.get_or_default());
             if (state_value.lead_representative == iter->account() && rank == 0)
             {
-               //amount += dist.extra_distribution[rank];
+               amount += dist.extra_distribution[rank];
             }
             dist_accounts_tb.emplace(contract, [&](auto& row) {
                auto fund = distribution_account_v0{.id = dist_accounts_tb.available_primary_key(),
@@ -282,10 +283,11 @@ namespace eden
       }
       if (dist_iter != dist_idx.end())
       {
-         //eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance");
-         
+         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance");
+         if (dist_iter->balance().amount == 0)
+         {
             dist_accounts_tb.erase(*dist_iter);
-         
+         }
       }
       return max_steps;
    }
