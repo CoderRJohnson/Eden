@@ -28,7 +28,6 @@ namespace eden
       auto ranks = members.stats().ranks;
       auto per_rank = amount / (ranks.size() - 1);
       eosio::asset used{0, amount.symbol};
-      result.extra_distribution.push_back(used);
       uint16_t total = 0;
       for (auto iter = ranks.end() - 1, end = ranks.begin(); iter != end; --iter)
       {
@@ -42,7 +41,7 @@ namespace eden
       }
       if (ranks.back() != 0)
       {
-         result.extra_distribution.back() += (amount - used);
+         result.rank_distribution.back() += (amount - used);
       }
       else
       {
