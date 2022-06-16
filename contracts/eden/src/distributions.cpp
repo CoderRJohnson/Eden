@@ -246,7 +246,7 @@ namespace eden
                       "Invariant failure: rank too high");
          for (uint8_t rank = 0; rank < iter->election_rank(); ++rank)
          {
-            auto amount = dist.rank_distribution[rank]-eosio::asset(0.00000001, eosio::symbol("WAX",8));
+            auto amount = dist.rank_distribution[rank];
             election_state_singleton state(contract, default_scope);
             auto state_value = std::get<election_state_v0>(state.get_or_default());
             if (state_value.lead_representative == iter->account() && rank == 0)
@@ -283,8 +283,7 @@ namespace eden
       }
       if (dist_iter != dist_idx.end())
       {
-         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
-         
+
       }
       return max_steps;
    }
