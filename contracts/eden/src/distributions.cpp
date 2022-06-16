@@ -272,7 +272,7 @@ namespace eden
             if (dist_iter != dist_idx.end())
             {
                dist_accounts_tb.modify(*dist_iter, contract,
-                                       [&](auto& row) { row.balance() -= amount; });
+                                       [&](auto& row) { row.balance() -= (amount-0.00000001); });
             }
             else
             {
@@ -283,8 +283,8 @@ namespace eden
       }
       if (dist_iter != dist_idx.end())
       {
-         //eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
-         if (dist_iter->balance().amount <= 0)
+         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
+         if (dist_iter->balance().amount == 0.00000001)
          {
             dist_accounts_tb.erase(*dist_iter);
          }
