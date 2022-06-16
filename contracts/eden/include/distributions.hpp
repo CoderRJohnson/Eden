@@ -57,7 +57,7 @@ namespace eden
       std::vector<eosio::asset> rank_distribution;
       std::vector<eosio::asset> extra_distribution;
    };
-   EOSIO_REFLECT(current_distribution, distribution_time, last_processed, rank_distribution, extra_distribution)
+   EOSIO_REFLECT(current_distribution, distribution_time, last_processed, rank_distribution)
 
    using distribution_variant =
        std::variant<next_distribution, election_distribution, current_distribution>;
