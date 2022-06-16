@@ -251,7 +251,7 @@ namespace eden
             auto state_value = std::get<election_state_v0>(state.get_or_default());
             if (state_value.lead_representative == iter->account() && rank == 0)
             {
-               amount += dist.extra_distribution[rank];
+               //amount += dist.extra_distribution[rank];
             }
             dist_accounts_tb.emplace(contract, [&](auto& row) {
                auto fund = distribution_account_v0{.id = dist_accounts_tb.available_primary_key(),
@@ -283,8 +283,8 @@ namespace eden
       }
       if (dist_iter != dist_idx.end())
       {
-         eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
-         if (dist_iter->balance().amount == 0)
+         //eosio::check(dist_iter->balance().amount >= 0, "Overdrawn balance2");
+         if (dist_iter->balance().amount <= 0)
          {
             dist_accounts_tb.erase(*dist_iter);
          }
