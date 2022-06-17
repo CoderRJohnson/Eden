@@ -449,8 +449,8 @@ namespace eden
       eosio::check(old_state_ptr != nullptr, "Election seed not set");
       auto& old_state = *old_state_ptr;
       auto election_start_time = old_state.seed.end_time.to_time_point();
-      eosio::check(eosio::current_block_time() >= old_state.seed.end_time,
-                   "Seeding window is still open");
+      //eosio::check(eosio::current_block_time() >= old_state.seed.end_time,
+                   //"Seeding window is still open");
       set_state_sing(current_election_state_init_voters_v1{
           0, election_rng{old_state.seed.current}, {}, 0, old_state.election_schedule_version});
       push_event(election_event_end_seeding{.election_time = election_start_time}, contract);
