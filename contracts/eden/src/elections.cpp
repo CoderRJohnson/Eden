@@ -825,10 +825,10 @@ namespace eden
 
       if (auto* prev_round = std::get_if<current_election_state_active>(&state))
       {
-         if (eosio::current_block_time() < prev_round->round_end)
-         {
-            return max_steps;
-         }
+         //if (eosio::current_block_time() < prev_round->round_end)
+         //{
+            //return max_steps;
+         //}
          push_event(
              election_event_end_round_voting{
                  .election_time = election_start_time,
