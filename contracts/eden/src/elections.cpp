@@ -841,7 +841,7 @@ namespace eden
       }
       else if (auto* final_round = std::get_if<current_election_state_final>(&state))
       {
-         if (max_steps > 0 && final_round->seed.end_time <= eosio::current_block_time())
+         if (max_steps > 0)
          {
             election_rng rng(final_round->seed.current);
             auto board = extract_board();
