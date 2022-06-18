@@ -137,10 +137,6 @@ jobs:
                   echo =====
                   ccache -s
                   echo =====
-                  
-            - name: 🧪 Run tests with CTest
-              if: steps.filter.outputs.src == 'true'
-              run: cd build && ctest -j$(nproc) -V
 
             - name: 📃 Upload ccache.log
               if: steps.filter.outputs.src == 'true'
