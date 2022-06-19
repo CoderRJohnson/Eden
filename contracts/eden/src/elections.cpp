@@ -489,6 +489,8 @@ namespace eden
             }
             else
             {
+               eosio::check(iter->election_participation_status() == state.election_schedule_version,
+                   "error " + iter->election_participation_status().to_string() + " + " + state.election_schedule_version.to_string());
                members.set_rank(iter->account(), 0, eosio::name(-1));
             }
          }
