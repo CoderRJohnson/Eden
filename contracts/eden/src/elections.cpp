@@ -533,9 +533,7 @@ namespace eden
       {
          if (iter->status() == member_status::active_member)
          {
-            eosio::check(state.election_schedule_version == 2, "error20");
             eosio::check(iter->election_participation_status() == 2, "error10");
-            
          }
          ++iter;
       }
@@ -557,9 +555,7 @@ namespace eden
          {
             if (iter->status() == member_status::active_member)
             {
-               eosio::check(state.election_schedule_version == 2, "error21");
                eosio::check(iter->election_participation_status() == 2, "error11");
-
             }
             ++iter;
          }
@@ -584,9 +580,7 @@ namespace eden
          {
             if (iter->status() == member_status::active_member)
             {
-               eosio::check(state.election_schedule_version == 2, "error22");
                eosio::check(iter->election_participation_status() == 2, "error12");
-
             }
             ++iter;
          }
