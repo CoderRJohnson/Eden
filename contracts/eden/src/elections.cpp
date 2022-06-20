@@ -525,6 +525,21 @@ namespace eden
 
    uint32_t elections::prepare_election(uint32_t max_steps)
    {
+      members members(contract);
+      const auto& member_tb = members.get_table();
+      auto iter = member_tb.begin();
+      auto end = member_tb.end();
+      for (; max_steps > 0 && iter != end; --max_steps)
+      {
+         if (iter->status() == member_status::active_member)
+         {
+            eosio::check(state.election_schedule_version == 2, "error20");
+            eosio::check(iter->election_participation_status() == 2, "error10");
+            
+         }
+         ++iter;
+      }
+      
       auto state_variant = state_sing.get();
       if (auto* state = get_if_derived<current_election_state_seeding_v0>(&state_variant))
       {
@@ -533,6 +548,22 @@ namespace eden
             return max_steps;
          }
          start_election();
+         
+         members members(contract);
+         const auto& member_tb = members.get_table();
+         auto iter = member_tb.begin();
+         auto end = member_tb.end();
+         for (; max_steps > 0 && iter != end; --max_steps)
+         {
+            if (iter->status() == member_status::active_member)
+            {
+               eosio::check(state.election_schedule_version == 2, "error21");
+               eosio::check(iter->election_participation_status() == 2, "error11");
+
+            }
+            ++iter;
+         }
+         
          state_variant = state_sing.get();
          --max_steps;
       }
@@ -544,6 +575,22 @@ namespace eden
          {
             return max_steps;
          }
+         
+         members members(contract);
+         const auto& member_tb = members.get_table();
+         auto iter = member_tb.begin();
+         auto end = member_tb.end();
+         for (; max_steps > 0 && iter != end; --max_steps)
+         {
+            if (iter->status() == member_status::active_member)
+            {
+               eosio::check(state.election_schedule_version == 2, "error22");
+               eosio::check(iter->election_participation_status() == 2, "error12");
+
+            }
+            ++iter;
+         }
+         
          max_steps = randomize_voters(*state, max_steps);
          if (max_steps > 0)
          {
