@@ -547,7 +547,6 @@ namespace eden
          }
          start_election();
          
-         members members(contract);
          const auto& member_tb = members.get_table();
          auto iter = member_tb.begin();
          auto end = member_tb.end();
@@ -572,7 +571,6 @@ namespace eden
             return max_steps;
          }
          
-         members members(contract);
          const auto& member_tb = members.get_table();
          auto iter = member_tb.begin();
          auto end = member_tb.end();
