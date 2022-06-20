@@ -489,9 +489,9 @@ namespace eden
             }
             else
             {
-               eosio::check(state.election_schedule_version == 2, "error2");
-               eosio::check(iter->election_participation_status() == 0, "error1");
-               eosio::check(iter->election_participation_status() == 2, "error1");
+               eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n && state.election_schedule_version == 2, "error2" + iter->account());
+               eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n && iter->election_participation_status() == 0, "error1" + iter->account());
+               eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n && iter->election_participation_status() == 2, "error1" + iter->account());
                members.set_rank(iter->account(), 0, eosio::name(-1));
             }
          }
@@ -533,7 +533,7 @@ namespace eden
       {
          if (iter->status() == member_status::active_member)
          {
-            eosio::check(iter->election_participation_status() == 2, "error10");
+            eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n && iter->election_participation_status() == 2, "error10" + iter->account());
          }
          ++iter;
       }
@@ -554,7 +554,7 @@ namespace eden
          {
             if (iter->status() == member_status::active_member)
             {
-               eosio::check(iter->election_participation_status() == 2, "error11");
+               eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n && iter->election_participation_status() == 2, "error11" + iter->account());
             }
             ++iter;
          }
@@ -578,7 +578,7 @@ namespace eden
          {
             if (iter->status() == member_status::active_member)
             {
-               eosio::check(iter->election_participation_status() == 2, "error12");
+               eosio::check(iter->account() != "alice.edev"_n && iter->account() != "egeon.edev"_n && iter->account() != "pip.edev"_n &&iter->election_participation_status() == 2, "error12" + iter->account());
             }
             ++iter;
          }
