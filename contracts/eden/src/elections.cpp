@@ -533,7 +533,7 @@ namespace eden
       {
          if (iter->status() == member_status::active_member)
          {
-            eosio::check(iter->nft_template_id() == 453163 || iter->nft_template_id() == 453165, "error10" + iter->account().to_string());
+            eosio::check(iter->nft_template_id() == 453163 || iter->nft_template_id() == 453165 || iter->nft_template_id() == 453164 || iter->election_participation_status() == 2, "error10" + iter->account().to_string());
          }
          ++iter;
       }
