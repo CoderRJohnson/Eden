@@ -555,7 +555,6 @@ namespace eden
             if (iter->status() == member_status::active_member)
             {
                eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error11" + iter->account().to_string());
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev", "error1001" + iter->account().to_string());
             }
             ++iter;
          }
@@ -579,7 +578,8 @@ namespace eden
          {
             if (iter->status() == member_status::active_member)
             {
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->election_participation_status() == 2, "error12" + iter->account().to_string());
+               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error12" + iter->account().to_string());
+               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev", "error1003" + iter->account().to_string());
             }
             ++iter;
          }
