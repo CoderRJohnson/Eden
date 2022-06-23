@@ -486,6 +486,7 @@ namespace eden
             if (iter->election_participation_status() == state.election_schedule_version)
             {
                add_voter(state.rng, 0, state.next_member_idx, iter->account());
+               eosio::check(iter->election_participation_status() == 0, "error1" + iter->account().to_string());
             }
             else
             {
