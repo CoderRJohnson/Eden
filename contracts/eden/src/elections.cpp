@@ -477,7 +477,7 @@ namespace eden
    {
       members members(contract);
       const auto& member_tb = members.get_table();
-      auto iter = member_tb.upper_bound(state.last_processed.value);
+      auto iter = member_tb.begin();
       auto end = member_tb.end();
       for (; max_steps > 0 && iter != end; --max_steps)
       {
@@ -580,7 +580,6 @@ namespace eden
             if (iter->status() == member_status::active_member)
             {
                eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error12" + iter->account().to_string());
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev", "error1003" + iter->account().to_string() + *state.last_processed.to_string());
             }
             ++iter;
          }
