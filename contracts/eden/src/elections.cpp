@@ -477,7 +477,7 @@ namespace eden
    {
       members members(contract);
       const auto& member_tb = members.get_table();
-      auto iter = member_tb.begin();
+      auto iter = member_tb.upper_bound(state.last_processed.value);
       auto end = member_tb.end();
       for (; max_steps > 0 && iter != end; --max_steps)
       {
