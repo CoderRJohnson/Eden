@@ -640,11 +640,7 @@ namespace eden
                    contract);
                if (configs.size() == 1)
                {
-                  auto board = extract_board();
-                  auto winner = board.front();
-                  //finish_election(std::move(board), winner, false);
-                  --max_steps;
-                  return max_steps;
+                  
                }
                else
                {
