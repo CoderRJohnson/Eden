@@ -624,6 +624,37 @@ namespace eden
                report_create_group(0, contract, group_start, group_size, election_start_time);
                state->next_report_index += group_size;
             }
+            
+            if (max_steps > 0)
+            {
+               push_event(
+                   election_event_begin_round_voting{
+                       .election_time = election_start_time,
+                       .round = 0,
+                       .voting_begin = eosio::current_time_point(),
+                       .voting_end =
+                           eosio::current_time_point() +
+                           eosio::seconds(configs.size() > 1 ? globals.get().election_round_time_sec
+                                                             : 0),
+                   },
+                   contract);
+               if (configs.size() == 1)
+               {
+                  auto board = extract_board();
+                  auto winner = board.front();
+                  //finish_election(std::move(board), winner, false);
+                  --max_steps;
+                  return max_steps;
+               }
+               else
+               {
+                  state_variant = current_election_state_active{
+                      0, configs.front(), state->rng.seed(),
+                      eosio::current_time_point() +
+                          eosio::seconds(globals.get().election_round_time_sec)};
+               }
+               --max_steps;
+            }
          }
       }
       set_state_sing(state_variant);
