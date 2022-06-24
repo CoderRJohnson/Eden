@@ -627,17 +627,7 @@ namespace eden
             
             if (max_steps > 0)
             {
-               push_event(
-                   election_event_begin_round_voting{
-                       .election_time = election_start_time,
-                       .round = 0,
-                       .voting_begin = eosio::current_time_point(),
-                       .voting_end =
-                           eosio::current_time_point() +
-                           eosio::seconds(configs.size() > 1 ? globals.get().election_round_time_sec
-                                                             : 0),
-                   },
-                   contract);
+               
                if (configs.size() == 1)
                {
                   
