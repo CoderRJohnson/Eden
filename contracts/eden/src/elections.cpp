@@ -642,7 +642,7 @@ namespace eden
                {
                   auto board = extract_board();
                   auto winner = board.front();
-                  finish_election(std::move(board), winner);
+                  finish_election(std::move(board), winner, false);
                   --max_steps;
                   return max_steps;
                }
