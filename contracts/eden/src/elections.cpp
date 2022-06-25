@@ -634,10 +634,7 @@ namespace eden
                }
                else
                {
-                  state_variant = current_election_state_active{
-                      0, configs.front(), state->rng.seed(),
-                      eosio::current_time_point() +
-                          eosio::seconds(globals.get().election_round_time_sec)};
+                  
                }
                --max_steps;
             }
