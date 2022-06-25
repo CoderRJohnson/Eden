@@ -627,10 +627,24 @@ namespace eden
             
             if (max_steps > 0)
             {
-               
+               push_event(
+                   election_event_begin_round_voting{
+                       .election_time = election_start_time,
+                       .round = 0,
+                       .voting_begin = eosio::current_time_point(),
+                       .voting_end =
+                           eosio::current_time_point() +
+                           eosio::seconds(configs.size() > 1 ? globals.get().election_round_time_sec
+                                                             : 0),
+                   },
+                   contract);
                if (configs.size() == 1)
                {
-                  
+                  auto board = extract_board();
+                  auto winner = board.front();
+                  finish_election(std::move(board), winner);
+                  --max_steps;
+                  return max_steps;
                }
                else
                {
@@ -855,10 +869,10 @@ namespace eden
 
       if (auto* prev_round = std::get_if<current_election_state_active>(&state))
       {
-         //if (eosio::current_block_time() < prev_round->round_end)
-         //{
-            //return max_steps;
-         //}
+         if (eosio::current_block_time() < prev_round->round_end)
+         {
+            return max_steps;
+         }
          push_event(
              election_event_end_round_voting{
                  .election_time = election_start_time,
