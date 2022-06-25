@@ -96,9 +96,9 @@ namespace eden
          if (init != eosio::block_timestamp())
          {
             push_event(distribution_event_schedule{init}, contract);
-            init = eosio::time_point(init) - eosio::seconds(24 * 60 * 60);
+            eosio::block_timestamp seeding_start = eosio::time_point(init) - eosio::seconds(24 * 60 * 60);
             distribution_tb.emplace(contract,
-                                    [&](auto& row) { row.value = next_distribution{init}; });
+                                    [&](auto& row) { row.value = next_distribution{seeding_start}; });
          }
          else
          {
