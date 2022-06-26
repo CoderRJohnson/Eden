@@ -486,14 +486,9 @@ namespace eden
             if (iter->election_participation_status() == state.election_schedule_version)
             {
                add_voter(state.rng, 0, state.next_member_idx, iter->account());
-               //eosio::check(iter->election_participation_status() == 0, "error1" + iter->account().to_string());
             }
             else
             {
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || state.election_schedule_version == 2, "error2" + iter->account().to_string());
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 0, "error1" + iter->account().to_string());
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error1" + iter->account().to_string());
-               //eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev", "error1004" + iter->account().to_string() + state.last_processed.to_string());
                members.set_rank(iter->account(), 0, eosio::name(-1));
             }
          }
@@ -527,19 +522,6 @@ namespace eden
 
    uint32_t elections::prepare_election(uint32_t max_steps)
    {
-      members members(contract);
-      const auto& member_tb = members.get_table();
-      auto iter = member_tb.begin();
-      auto end = member_tb.end();
-      for (; max_steps > 0 && iter != end; --max_steps)
-      {
-         if (iter->status() == member_status::active_member)
-         {
-            eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error10" + iter->account().to_string());
-         }
-         ++iter;
-      }
-      
       auto state_variant = state_sing.get();
       if (auto* state = get_if_derived<current_election_state_seeding_v0>(&state_variant))
       {
@@ -548,19 +530,6 @@ namespace eden
             return max_steps;
          }
          start_election();
-         
-         const auto& member_tb = members.get_table();
-         auto iter = member_tb.begin();
-         auto end = member_tb.end();
-         for (; max_steps > 0 && iter != end; --max_steps)
-         {
-            if (iter->status() == member_status::active_member)
-            {
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error11" + iter->account().to_string());
-            }
-            ++iter;
-         }
-         
          state_variant = state_sing.get();
          --max_steps;
       }
@@ -572,19 +541,6 @@ namespace eden
          {
             return max_steps;
          }
-         
-         const auto& member_tb = members.get_table();
-         auto iter = member_tb.begin();
-         auto end = member_tb.end();
-         for (; max_steps > 0 && iter != end; --max_steps)
-         {
-            if (iter->status() == member_status::active_member)
-            {
-               eosio::check(iter->account().to_string() == "alice.edev" || iter->account().to_string() == "egeon.edev" || iter->account().to_string() == "pip.edev" || iter->account().to_string() == "test111.edev" || iter->election_participation_status() == 2, "error12" + iter->account().to_string());
-            }
-            ++iter;
-         }
-         
          max_steps = randomize_voters(*state, max_steps);
          if (max_steps > 0)
          {
