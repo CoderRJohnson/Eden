@@ -453,6 +453,8 @@ namespace eden
                    "Seeding window is still open");
       set_state_sing(current_election_state_init_voters_v1{
           0, election_rng{old_state.seed.current}, {}, 0, old_state.election_schedule_version});
+      eosio::check(eosio::current_block_time() >= old_state.seed.end_time,
+                   "Seeding window is still open000");
       push_event(election_event_end_seeding{.election_time = election_start_time}, contract);
 
       // Must happen after the election is started
